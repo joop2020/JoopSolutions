@@ -8,7 +8,7 @@ Joop Solutions Custom
     'author': 'JJM',
     'email': 'admin@jjm.mx',
     'category': 'Custom Development',
-    'version': '18.0.0.1.0',
+    'version': '19.0.0.2.0',
     'depends': [
         'base',
         'purchase',
