@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Heredar vista de lista de facturas para añadir campo l10n_mx_edi_payment_policy -->
+    <record id="view_out_invoice_tree_inherit_joop" model="ir.ui.view">
+        <field name="name">account.out.invoice.list.inherit.joop</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree"/>
+        <field name="arch" type="xml">
+            <field name="currency_id" position="after">
+                <field name="l10n_mx_edi_payment_policy" optional="show" string="Politica de Pago"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Heredar vista de búsqueda para añadir agrupaciones -->
+    <record id="view_account_invoice_filter_inherit_joop" model="ir.ui.view">
+        <field name="name">account.invoice.select.inherit.joop</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <filter name="group_by_company" position="after">
+                <filter string="Estado SAT" name="group_by_sat_state" context="{'group_by': 'l10n_mx_edi_cfdi_sat_state'}"/>
+                <filter string="Estado CFDI" name="group_by_cfdi_state" context="{'group_by': 'l10n_mx_edi_cfdi_state'}"/>
+            </filter>
+        </field>
+    </record>
+</odoo>

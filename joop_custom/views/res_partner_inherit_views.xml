@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_inherit_form_joop_custom" model="ir.ui.view">
+        <field name="name">view.partner.inherit.form.joop.custom</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="purchase.view_partner_property_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='purchase']/field[@name='property_purchase_currency_id']" position="after">
+                <field name="manufacturer_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
