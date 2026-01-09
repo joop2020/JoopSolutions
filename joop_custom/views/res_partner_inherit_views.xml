@@ -10,4 +10,29 @@
             </xpath>
         </field>
     </record>
+
+    <record id="view_partner_tree_inherit_joop_custom" model="ir.ui.view">
+        <field name="name">view.partner.tree.inherit.joop.custom</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='complete_name']" position="after">
+                <field name="manufacturer_id" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_search_inherit_joop_custom" model="ir.ui.view">
+        <field name="name">view.partner.search.inherit.joop.custom</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="manufacturer_id"/>
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter string="Fabricante" name="group_by_manufacturer" context="{'group_by': 'manufacturer_id'}"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>
