@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Heredar vista de lista de facturas para añadir campo l10n_mx_edi_payment_policy -->
     <record id="view_out_invoice_tree_inherit_joop" model="ir.ui.view">
         <field name="name">account.out.invoice.list.inherit.joop</field>
         <field name="model">account.move</field>
@@ -12,7 +11,6 @@
         </field>
     </record>
 
-    <!-- Heredar vista de búsqueda para añadir agrupaciones -->
     <record id="view_account_invoice_filter_inherit_joop" model="ir.ui.view">
         <field name="name">account.invoice.select.inherit.joop</field>
         <field name="model">account.move</field>

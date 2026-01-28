@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="helpdesk_tickets_view_tree_inherit" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.list.inherit.joop</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="ticket_type_id" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="helpdesk_ticket_view_form_inherit" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.form.inherit.joop</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
+        <field name="arch" type="xml">
+            <field name="team_id" position="after">
+                <field name="ticket_type_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="helpdesk_tickets_view_search_inherit" model="ir.ui.view">
+        <field name="name">helpdesk.ticket.search.inherit.joop</field>
+        <field name="model">helpdesk.ticket</field>
+        <field name="inherit_id" ref="helpdesk.helpdesk_tickets_view_search_base"/>
+        <field name="arch" type="xml">
+            <field name="stage_id" position="after">
+                <field name="ticket_type_id"/>
+            </field>
+            <filter name="priority" position="after">
+                <filter string="Tipo de Ticket" name="ticket_type" context="{'group_by': 'ticket_type_id'}"/>
+            </filter>
+        </field>
+    </record>
+
+</odoo>
