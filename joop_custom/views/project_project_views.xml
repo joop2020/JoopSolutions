@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_project_form_inherit" model="ir.ui.view">
+        <field name="name">project.project.form.inherit.joop</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_crm_lead"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-handshake-o"
+                    invisible="crm_lead_count == 0"
+                    groups="sales_team.group_sale_salesman">
+                    <field name="crm_lead_count" widget="statinfo" string="Oportunidad"/>
+                </button>
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="project_type_id" options="{'no_create': True}"/>
+            </xpath>
+
+            <xpath expr="//sheet" position="inside">
+                <field name="crm_lead_id" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_project_search_inherit" model="ir.ui.view">
+        <field name="name">project.project.search.inherit.joop</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_project_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="project_type_id"/>
+                <field name="crm_lead_id"/>
+            </xpath>
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <separator/>
+                <filter string="Desde CRM" name="from_crm" domain="[('crm_lead_id', '!=', False)]"/>
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter string="Tipo de Proyecto" name="group_project_type" context="{'group_by': 'project_type_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_project_kanban_inherit" model="ir.ui.view">
+        <field name="name">project.project.kanban.inherit.joop</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//templates" position="before">
+                <field name="project_type_id"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_crm_lead_form_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.form.inherit.joop</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_create_project"
+                    type="object"
+                    string="Crear Proyecto"
+                    class="btn-primary"
+                    invisible="not project_type_id or type == 'lead'"
+                    groups="project.group_project_user"/>
+            </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_projects"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-tasks"
+                    invisible="project_count == 0"
+                    groups="project.group_project_user">
+                    <field name="project_count" widget="statinfo" string="Proyectos"/>
+                </button>
+            </xpath>
+
+            <xpath expr="//field[@name='lead_properties']/.." position="before">
+                <group groups="project.group_project_user" class="mt-2">
+                    <group>
+                        <field name="project_type_id" options="{'no_create': True}"/>
+                    </group>
+                </group>
+            </xpath>
+
+            <xpath expr="//sheet" position="inside">
+                <field name="project_ids" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_search_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.search.inherit.joop</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_leads_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='inactive']" position="after">
+                <separator/>
+                <filter string="Con Proyectos" name="with_projects" domain="[('project_count', '&gt;', 0)]"/>
+                <filter string="Sin Proyectos" name="without_projects" domain="[('project_count', '=', 0)]"/>
+            </xpath>
+            <xpath expr="//filter[@name='date_closed']" position="after">
+                <filter string="Tipo de Proyecto" name="group_project_type" context="{'group_by': 'project_type_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_opportunity_search_inherit" model="ir.ui.view">
+        <field name="name">crm.opportunity.search.inherit.joop</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_won_status_lost']" position="after">
+                <separator/>
+                <filter string="Con Proyectos" name="with_projects" domain="[('project_count', '&gt;', 0)]"/>
+                <filter string="Sin Proyectos" name="without_projects" domain="[('project_count', '=', 0)]"/>
+            </xpath>
+            <xpath expr="//group[@colspan='16']" position="inside">
+                <filter string="Tipo de Proyecto" name="group_project_type" context="{'group_by': 'project_type_id'}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_lead_tree_inherit" model="ir.ui.view">
+        <field name="name">crm.lead.tree.inherit.joop</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="project_type_id" optional="hide"/>
+                <field name="project_count" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_opportunity_tree_inherit" model="ir.ui.view">
+        <field name="name">crm.opportunity.tree.inherit.joop</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="project_type_id" optional="hide"/>
+                <field name="project_count" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

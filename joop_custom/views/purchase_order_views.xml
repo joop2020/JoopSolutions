@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit.joop</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="task_id" readonly="1" groups="project.group_project_user"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_tree_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.tree.inherit.joop</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='origin']" position="after">
+                <field name="task_id" optional="hide" groups="project.group_project_user"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_search_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.search.inherit.joop</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="task_id"/>
+            </xpath>
+            <xpath expr="//group" position="inside">
+                <filter string="Tarea" name="group_task" context="{'group_by': 'task_id'}" groups="project.group_project_user"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
