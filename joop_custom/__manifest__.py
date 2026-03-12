@@ -21,6 +21,8 @@ Joop Solutions Custom
         'crm',
         'project',
         'project_purchase',
+        'sale_stock',
+        'sale_crm',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -31,6 +33,8 @@ Joop Solutions Custom
         'views/purchase_order_views.xml',
         'views/res_partner_inherit_views.xml',
         'views/account_move_views.xml',
+        'views/report_invoice.xml',
+        'views/report_deliveryslip.xml',
         'views/ticket_type_views.xml',
         'views/helpdesk_ticket_views.xml',
     ],
