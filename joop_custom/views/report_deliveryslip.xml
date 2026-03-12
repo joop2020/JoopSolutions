@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_delivery_document_project"
+              inherit_id="stock.report_delivery_document">
+
+        <xpath expr="//div[@name='div_sched_date']" position="after">
+            <div t-if="o.sale_id.opportunity_id" class="col col-3 mw-100 mb-2" name="div_project">
+                <strong>Proyecto</strong>
+                <div t-field="o.sale_id.opportunity_id.name" class="m-0"/>
+            </div>
+        </xpath>
+
+    </template>
+</odoo>
