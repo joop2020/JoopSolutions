@@ -11,7 +11,7 @@ Joop Solutions Custom
     'author': 'JJM',
     'email': 'admin@jjm.mx',
     'category': 'Custom Development',
-    'version': '19.0.0.4.0',
+    'version': '19.0.0.5.0',
     'depends': [
         'base',
         'purchase',
