@@ -11,7 +11,7 @@ Joop Solutions Custom
     'author': 'JJM',
     'email': 'admin@jjm.mx',
     'category': 'Custom Development',
-    'version': '19.0.0.4.0',
+    'version': '19.0.0.5.0',
     'depends': [
         'base',
         'purchase',
@@ -23,6 +23,7 @@ Joop Solutions Custom
         'project_purchase',
         'sale_stock',
         'sale_crm',
+        'product',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -37,6 +38,7 @@ Joop Solutions Custom
         'views/report_deliveryslip.xml',
         'views/ticket_type_views.xml',
         'views/helpdesk_ticket_views.xml',
+        'views/product_template_views.xml',
     ],
     'license': 'LGPL-3',
     'application': True,
