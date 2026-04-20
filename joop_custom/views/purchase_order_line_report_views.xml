@@ -34,7 +34,7 @@
                 <filter string="Borrador/RFQ" name="draft" domain="[('state', 'in', ('draft', 'sent', 'to approve'))]"/>
                 <separator/>
                 <filter string="Fecha de orden" name="date_order" date="date_order"/>
-                <group expand="0" string="Agrupar por">
+                <group>
                     <filter string="Orden" name="group_order" context="{'group_by': 'order_id'}"/>
                     <filter string="Proveedor" name="group_partner" context="{'group_by': 'partner_id'}"/>
                     <filter string="Producto" name="group_product" context="{'group_by': 'product_id'}"/>
