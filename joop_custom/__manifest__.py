@@ -32,6 +32,7 @@ Joop Solutions Custom
         'views/project_project_views.xml',
         'views/project_task_views.xml',
         'views/purchase_order_views.xml',
+        'views/purchase_order_line_report_views.xml',
         'views/res_partner_inherit_views.xml',
         'views/account_move_views.xml',
         'views/report_invoice.xml',
