@@ -5,3 +5,5 @@ from . import project_project
 from . import project_task
 from . import purchase_order
 from . import product_template
+from . import joop_equipment_type
+from . import worksheet_template

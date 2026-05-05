@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="joop_fsm_worksheet_template" model="worksheet.template">
+            <field name="name">Hoja Tecnica Visita Joop</field>
+            <field name="res_model">project.task</field>
+        </record>
+
+        <function model="worksheet.template" name="_create_joop_fsm_fields"/>
+
+        <record id="joop_fsm_worksheet_template_form_inherit" model="ir.ui.view">
+            <field name="name">joop.fsm.worksheet.template.form.inherit</field>
+            <field name="model" model="ir.model"
+                   eval="obj().env.ref('joop_custom.joop_fsm_worksheet_template').model_id.model"/>
+            <field name="inherit_id" model="ir.ui.view"
+                   search="[('name', 'ilike', 'template_view_Hoja_Tecnica_Visita_Joop')]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet" position="replace">
+                    <sheet>
+                        <group invisible="context.get('studio') or context.get('default_x_project_task_id')">
+                            <div class="oe_title text-break" colspan="2">
+                                <h1>
+                                    <field name="x_project_task_id" domain="[('is_fsm', '=', True)]" readonly="1"/>
+                                </h1>
+                            </div>
+                        </group>
+
+                        <notebook>
+                            <page string="Revisión del sitio" name="rev_sitio">
+
+                                <separator string="Limpieza gabinete *"/>
+                                <group>
+                                    <field name="x_limpieza_ok" string="Site limpio"/>
+                                    <field name="x_limpieza_other" string="Other" placeholder="Observación libre..."/>
+                                </group>
+
+                                <separator string="Reinicio impresora *"/>
+                                <group>
+                                    <field name="x_reinicio_ok" string="Se reinició"/>
+                                    <field name="x_reinicio_other" string="Other" placeholder="Observación libre..."/>
+                                </group>
+
+                                <separator string="Estado físico de los equipos *"/>
+                                <div class="text-muted oe_edit_only">
+                                    En "Other" colocar equipos dañados o con detalle.
+                                </div>
+                                <group>
+                                    <field name="x_estado_ok" string="Equipos en buen estado"/>
+                                    <field name="x_estado_other" string="Other" placeholder="Equipos dañados o con detalle..."/>
+                                </group>
+
+                                <separator string="Revisión de equipo de impresión *"/>
+                                <div class="text-muted oe_edit_only">
+                                    Revisión de las impresoras vendidas por Joop.
+                                </div>
+                                <group>
+                                    <field name="x_impresion_ok" string="Equipos de impresión en buen estado"/>
+                                    <field name="x_impresion_other" string="Other" placeholder="Observación libre..."/>
+                                </group>
+
+                            </page>
+
+                            <page string="Red e infraestructura" name="rev_red">
+
+                                <separator string="Revisión Mikrotik *"/>
+                                <group>
+                                    <field name="x_mikrotik_ok" string="Mikrotik sin problemas"/>
+                                    <field name="x_mikrotik_other" string="Other" placeholder="Observación libre..."/>
+                                </group>
+
+                                <separator string="Revisión VPN's (Mikrotik) *"/>
+                                <div class="text-muted oe_edit_only">
+                                    Revisión conectividad VPN Joop a Cliente (se garantizará su configuración y conectividad).
+                                </div>
+                                <group>
+                                    <field name="x_vpn_ok" string="VPN's sin problemas"/>
+                                    <field name="x_vpn_other" string="Other" placeholder="Observación libre..."/>
+                                </group>
+
+                                <separator string="Revisión portal Extreme Cloud IQ *"/>
+                                <div class="text-muted oe_edit_only">
+                                    Revisión de antenas y switch conectados al portal. En "Other" reportar fallas.
+                                </div>
+                                <group>
+                                    <field name="x_extreme_ok" string="Equipos sin problema"/>
+                                    <field name="x_extreme_other" string="Other" placeholder="Reportar fallas..."/>
+                                </group>
+
+                                <separator string="Conectividad en todos los SSID *"/>
+                                <div class="text-muted oe_edit_only">
+                                    Conectarse a todas las redes existentes y corroborar servicio en ellas.
+                                </div>
+                                <group>
+                                    <field name="x_ssid_ok" string="Wifi con conectividad"/>
+                                    <field name="x_ssid_other" string="Other" placeholder="Observación libre..."/>
+                                </group>
+
+                                <separator string="Velocidad enlace proveedor de internet *"/>
+                                <div class="text-muted oe_edit_only">
+                                    Se reportará la velocidad actual que está entregando el proveedor.
+                                </div>
+                                <group>
+                                    <field name="x_velocidad" string="Velocidad medida" placeholder="Ej. 200/200 Mbps"/>
+                                </group>
+
+                                <separator string="Recorrido cobertura wifi *"/>
+                                <div class="text-muted oe_edit_only">
+                                    Realizar recorrido por todos los puntos de conexión, para garantizar la conectividad y señal.
+                                </div>
+                                <group>
+                                    <field name="x_cobertura_ok" string="Señal óptima en redes wifi"/>
+                                    <field name="x_cobertura_other" string="Other" placeholder="Observación libre..."/>
+                                </group>
+
+                            </page>
+
+                            <page string="Actualizaciones y portales" name="rev_actualizaciones">
+
+                                <separator string="Revisión actualización de equipos *"/>
+                                <div class="text-muted oe_edit_only">
+                                    La verificación de las casillas indica que el equipo sí está actualizado.
+                                    En "Other" especificar la versión y equipo que faltaría.
+                                </div>
+                                <group>
+                                    <field name="x_actualizacion_ids"
+                                           string="Equipos actualizados"
+                                           widget="many2many_checkboxes"
+                                           options="{'no_create': True}"/>
+                                    <field name="x_actualizacion_other" string="Other" placeholder="Versión y equipo que faltaría..."/>
+                                </group>
+
+                                <separator string="Revisión portal Office 365 *"/>
+                                <div class="text-muted oe_edit_only">
+                                    Revisión del panel de administración y control de cambios.
+                                </div>
+                                <group>
+                                    <field name="x_office365_ok" string="Office 365 correcto"/>
+                                    <field name="x_office365_other" string="Other" placeholder="Observación libre..."/>
+                                </group>
+
+                            </page>
+
+                            <page string="Cierre" name="cierre">
+
+                                <separator string="Usuario con inconveniente *"/>
+                                <group>
+                                    <field name="x_usuario_inconveniente" nolabel="1"
+                                           placeholder="Describir usuarios con inconvenientes reportados durante la visita..."/>
+                                </group>
+
+                                <separator string="Datos de cierre"/>
+                                <group>
+                                    <field name="x_fecha"/>
+                                    <field name="x_firma" widget="signature"/>
+                                </group>
+
+                                <separator string="Comentarios adicionales"/>
+                                <group>
+                                    <field name="x_comments" nolabel="1"
+                                           placeholder="Comentarios libres..."/>
+                                </group>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                </xpath>
+            </field>
+        </record>
+
+        <function model="worksheet.template" name="_create_joop_fsm_automation"/>
+
+        <function model="worksheet.template" name="_generate_qweb_report_template">
+            <value eval="[ref('joop_fsm_worksheet_template')]"/>
+            <value model="ir.ui.view"
+                   eval="obj().env.ref('joop_custom.joop_fsm_worksheet_template_form_inherit').id"/>
+        </function>
+
+    </data>
+</odoo>

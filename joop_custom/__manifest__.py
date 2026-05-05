@@ -11,7 +11,7 @@ Joop Solutions Custom
     'author': 'JJM',
     'email': 'admin@jjm.mx',
     'category': 'Custom Development',
-    'version': '19.0.0.6.0',
+    'version': '19.0.0.7.0',
     'depends': [
         'base',
         'purchase',
@@ -24,9 +24,13 @@ Joop Solutions Custom
         'sale_stock',
         'sale_crm',
         'product',
+        'industry_fsm_report',
+        'base_automation',
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/joop_equipment_type_data.xml',
+        'data/joop_fsm_worksheet_template.xml',
         'views/project_type_views.xml',
         'views/crm_lead_views.xml',
         'views/project_project_views.xml',
