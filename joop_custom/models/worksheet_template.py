@@ -6,8 +6,14 @@ class WorksheetTemplate(models.Model):
 
     @api.model
     def _create_joop_fsm_fields(self):
-        template = self.env.ref('joop_custom.joop_fsm_worksheet_template')
+        template = self.env.ref('joop_custom.joop_fsm_worksheet_template', raise_if_not_found=False)
+        if not template or not template.model_id:
+            return
         model_id = template.model_id.id
+
+        existing_names = set(self.env['ir.model.fields'].search([
+            ('model_id', '=', model_id),
+        ]).mapped('name'))
 
         bool_other_sections = [
             ('limpieza', 'Site limpio'),
@@ -79,9 +85,9 @@ class WorksheetTemplate(models.Model):
             },
         ]
 
-        self.env['ir.model.fields'].with_context(
-            _import_current_module='joop_custom'
-        ).create(vals)
+        vals = [v for v in vals if v['name'] not in existing_names]
+        if vals:
+            self.env['ir.model.fields'].create(vals)
 
     @api.model
     def _create_joop_fsm_automation(self):
