@@ -104,7 +104,6 @@ class WorksheetTemplate(models.Model):
             return
 
         code = (
-            "from odoo.exceptions import ValidationError\n"
             "sections = [\n"
             "    ('limpieza', 'Limpieza gabinete'),\n"
             "    ('reinicio', 'Reinicio impresora'),\n"
@@ -127,7 +126,7 @@ class WorksheetTemplate(models.Model):
             "    if not rec.x_actualizacion_ids and not (rec.x_actualizacion_other or '').strip():\n"
             "        missing.append('Revisión actualización de equipos')\n"
             "    if missing:\n"
-            "        raise ValidationError(\n"
+            "        raise UserError(\n"
             "            'Debe marcar la casilla OK o llenar el campo \"Other\" en las siguientes secciones:\\n- '\n"
             "            + '\\n- '.join(missing)\n"
             "        )\n"
