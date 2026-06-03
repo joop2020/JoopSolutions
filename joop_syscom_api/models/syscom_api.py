@@ -178,8 +178,10 @@ class SyscomApi(models.AbstractModel):
         """
         params = {"pagina": pagina}
         if busqueda:
-            # SYSCOM separa palabras clave con "+"
-            params["busqueda"] = busqueda.strip().replace(" ", "+")
+            # SYSCOM separa palabras clave por espacios; requests las codifica
+            # solo, así que NO hay que reemplazarlas por "+" a mano (hacerlo
+            # manda "%2B" literal en la URL y rompe la búsqueda).
+            params["busqueda"] = busqueda.strip()
         if categoria:
             params["categoria"] = categoria
         if marca:
