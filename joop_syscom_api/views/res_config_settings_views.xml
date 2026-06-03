@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form_syscom" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.syscom</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Syscom API" string="Syscom API" name="joop_syscom_api">
+                    <block title="Credenciales SYSCOM"
+                           name="syscom_credentials">
+                        <setting string="Client ID"
+                                 help="ID Client de su aplicación en developers.syscom.mx">
+                            <field name="syscom_client_id"/>
+                        </setting>
+                        <setting string="Client Secret"
+                                 help="Secret Client de su aplicación en developers.syscom.mx">
+                            <field name="syscom_client_secret" password="True"/>
+                        </setting>
+                        <setting string="Probar conexión"
+                                 help="Solicita un token y consulta un recurso para validar las credenciales.">
+                            <button name="action_syscom_test_connection"
+                                    type="object"
+                                    string="Probar conexión"
+                                    class="btn-secondary"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

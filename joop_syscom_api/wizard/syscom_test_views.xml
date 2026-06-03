@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_syscom_test_wizard_form" model="ir.ui.view">
+        <field name="name">joop.syscom.test.wizard.form</field>
+        <field name="model">joop.syscom.test.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Consulta al API de SYSCOM">
+                <group>
+                    <field name="operation"/>
+                </group>
+                <group string="Parámetros de búsqueda"
+                       invisible="operation != 'buscar'">
+                    <group>
+                        <field name="busqueda"/>
+                        <field name="categoria"/>
+                        <field name="marca"/>
+                    </group>
+                    <group>
+                        <field name="orden"/>
+                        <field name="pagina"/>
+                        <field name="solo_stock"/>
+                    </group>
+                </group>
+                <group invisible="operation != 'producto'">
+                    <field name="producto_id"/>
+                </group>
+                <group string="Resultado"
+                       invisible="not result_summary and not result_json">
+                    <field name="result_summary" nolabel="1"
+                           widget="text" readonly="1"/>
+                    <separator string="JSON completo"/>
+                    <field name="result_json" nolabel="1"
+                           widget="text" readonly="1"/>
+                </group>
+                <footer>
+                    <button name="action_run" type="object"
+                            string="Ejecutar" class="btn-primary"/>
+                    <button string="Cerrar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_syscom_test_wizard" model="ir.actions.act_window">
+        <field name="name">Consulta SYSCOM</field>
+        <field name="res_model">joop.syscom.test.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_syscom_root"
+              name="Syscom API"
+              sequence="95"/>
+
+    <menuitem id="menu_syscom_test"
+              name="Consulta SYSCOM"
+              parent="menu_syscom_root"
+              action="action_syscom_test_wizard"
+              sequence="10"/>
+
+</odoo>

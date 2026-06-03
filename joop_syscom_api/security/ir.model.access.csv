@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_syscom_test_wizard,joop.syscom.test.wizard,model_joop_syscom_test_wizard,base.group_system,1,1,1,1
